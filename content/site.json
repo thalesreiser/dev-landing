@@ -144,6 +144,10 @@
       "tipo": "sobre",
       "menu": "Sobre",
       "titulo": "Sobre mim",
+      "foto": {
+        "src": "thales.jpg",
+        "alt": "Retrato de Thales Reiser Pedreira, de cabelo castanho ondulado, barba, óculos escuros e camiseta preta, sobre fundo branco"
+      },
       "paragrafos": [
         "Sou Thales Reiser Pedreira, desenvolvedor em Porto Alegre/RS. Trabalho com dois tipos de projeto: sites de uma página para quem precisa ser encontrado e contatado, e pipelines de dados para quem precisa de números confiáveis.",
         "Prefiro soluções simples de manter: código versionado, testes automatizados e documentação escrita junto com o código. Os projetos desta página são públicos para que você possa avaliar o trabalho antes de conversarmos.",
