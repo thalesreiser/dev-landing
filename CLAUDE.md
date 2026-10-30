@@ -14,7 +14,8 @@ Landing page pessoal de Thales Reiser Pedreira para vender serviços de desenvol
   do repositório sustenta (inclusive o status: em desenvolvimento, concluído).
 - A seção de música (página de artista) é outro projeto; não entra aqui.
 - `em_construcao: true` mostra o aviso e marca `noindex`. Só passe para `false` com
-  WhatsApp, e-mail e chave do formulário reais; o schema reprova os provisórios.
+  WhatsApp e e-mail reais e o formulário com chave ou desligado (`ativo: false`); o schema
+  reprova os provisórios. Hoje o contato é só WhatsApp e e-mail (formulário desligado).
 - Acessível (rótulos, contraste AA em todos os pares do teste, foco visível, `alt`) e
   responsivo (legível a 360 px). Meta: 95+ no Lighthouse mobile.
 - Rode `npm run check`, `npm test` e `npm run build` antes de dizer que terminou.
@@ -23,8 +24,8 @@ Landing page pessoal de Thales Reiser Pedreira para vender serviços de desenvol
 - Deploy só pelo GitHub Actions (Cloudflare Pages, projeto `thales-dev`). O token existe
   apenas como secret do repositório (`CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID`);
   nunca peça, imprima ou grave o valor.
-- Repositório privado com minutos de Actions limitados: mantenha o CI em um job de build
-  (mais o `ci-ok`), sem matrizes nem jobs extras. O check obrigatório é `ci-ok`.
+- Mantenha o CI enxuto, em um job de build (mais o `ci-ok`), sem matrizes nem jobs extras.
+  O check obrigatório é `ci-ok`.
 - Commits, branches e PRs em inglês (Conventional Commits).
 
 ## Comandos

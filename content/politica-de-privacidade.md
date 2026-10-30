@@ -3,8 +3,8 @@ acontece com os dados enviados por este site.
 
 ## Quais dados coleto
 
-- Os dados que você informa no formulário de contato: nome, e-mail, WhatsApp (opcional) e a
-  descrição do que você precisa.
+- Os dados que você envia ao entrar em contato por WhatsApp ou e-mail, como nome, número ou
+  endereço de e-mail e a descrição do que você precisa.
 - Dados de navegação coletados por ferramentas de medição de audiência, somente se elas
   estiverem ativadas neste site e você aceitar, como páginas visitadas e tipo de dispositivo.
 
@@ -17,10 +17,9 @@ Não vendo nem compartilho seus dados para fins de publicidade de terceiros.
 
 ## Com quem compartilho
 
-- O serviço que recebe o formulário (Formspree ou Web3Forms), apenas para entregar sua
-  mensagem.
 - Ferramentas de medição (Google Analytics ou Meta), somente quando ativadas e aceitas.
-- A conversa pelo WhatsApp segue os termos do próprio WhatsApp.
+- A conversa pelo WhatsApp segue os termos do próprio WhatsApp, e o e-mail, os do provedor
+  de e-mail.
 
 ## Cookies e consentimento
 
