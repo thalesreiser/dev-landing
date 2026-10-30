@@ -1,0 +1,144 @@
+---
+import { Font, type CssVariable } from 'astro:assets';
+import '../styles/global.css';
+import AvisoCookies from '../components/AvisoCookies.astro';
+import { temRastreamento } from '../lib/consentimento.ts';
+import { pilhaComFontes, variavelFonte } from '../lib/fontes.ts';
+import { ancoraSecao, type Conteudo } from '../lib/schema.ts';
+import { ALTURA_OG, CAMINHO_OG, chamadaPrincipal, LARGURA_OG, localeOg, urlAbsoluta } from '../lib/seo.ts';
+import { coresFaixa } from '../lib/tema.ts';
+import { linkWhatsApp } from '../lib/whatsapp.ts';
+
+interface Props {
+  conteudo: Conteudo;
+  titulo?: string;
+  descricao?: string;
+}
+
+const { conteudo, titulo = conteudo.site.titulo, descricao = conteudo.site.descricao } = Astro.props;
+const { tema, contato, rastreamento } = conteudo;
+
+const pilhas = [tema.fonte_titulo, tema.fonte_texto];
+const faixa = coresFaixa(tema);
+const variaveisTema = [
+  `--cor-primaria:${tema.cor_primaria}`,
+  `--cor-primaria-contraste:${tema.cor_primaria_contraste}`,
+  `--cor-destaque:${tema.cor_destaque}`,
+  `--cor-destaque-escuro:${tema.cor_destaque_escuro}`,
+  `--cor-fundo:${tema.cor_fundo}`,
+  `--cor-superficie:${tema.cor_superficie}`,
+  `--cor-texto:${tema.cor_texto}`,
+  `--cor-texto-suave:${tema.cor_texto_suave}`,
+  // Fixed values for primary bands, which redefine the --cor-* variables inside them.
+  `--faixa-fundo:${faixa.fundo}`,
+  `--faixa-texto:${faixa.texto}`,
+  `--faixa-texto-suave:${faixa.texto_suave}`,
+  `--faixa-destaque:${faixa.destaque}`,
+  `--fonte-titulo:${pilhaComFontes(tema.fonte_titulo, tema.fontes, pilhas)}`,
+  `--fonte-texto:${pilhaComFontes(tema.fonte_texto, tema.fontes, pilhas)}`,
+  `--fonte-mono:${tema.fonte_mono}`,
+].join(';');
+
+const menu = conteudo.secoes
+  .filter((secao) => secao.ativo && secao.menu)
+  .map((secao) => ({ texto: secao.menu, href: `/#${ancoraSecao(secao)}` }));
+
+// Open Graph and canonical need absolute URLs, so they depend on site.url.
+const canonica = urlAbsoluta(conteudo.site.url, Astro.url.pathname);
+const imagemOg = urlAbsoluta(conteudo.site.url, CAMINHO_OG);
+const altOg = `${conteudo.site.nome}: ${chamadaPrincipal(conteudo)}`;
+---
+
+<!doctype html>
+<html lang={conteudo.site.idioma} style={variaveisTema}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{titulo}</title>
+    <meta name="description" content={descricao} />
+    <meta name="theme-color" content={tema.cor_texto} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    {canonica && <link rel="canonical" href={canonica} />}
+    {canonica && <link rel="sitemap" href="/sitemap-index.xml" />}
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={conteudo.site.nome} />
+    <meta property="og:locale" content={localeOg(conteudo.site.idioma)} />
+    <meta property="og:title" content={titulo} />
+    <meta property="og:description" content={descricao} />
+    {canonica && <meta property="og:url" content={canonica} />}
+    {
+      imagemOg && (
+        <>
+          <meta property="og:image" content={imagemOg} />
+          <meta property="og:image:type" content="image/png" />
+          <meta property="og:image:width" content={String(LARGURA_OG)} />
+          <meta property="og:image:height" content={String(ALTURA_OG)} />
+          <meta property="og:image:alt" content={altOg} />
+        </>
+      )
+    }
+    <meta name="twitter:card" content="summary_large_image" />
+    {/* Self-hosted at build time (astro.config.mjs reads tema.fontes); preloaded, with metric-matched fallbacks. */}
+    {tema.fontes.map((fonte) => <Font cssVariable={variavelFonte(fonte.familia) as CssVariable} preload />)}
+    {conteudo.em_construcao && <meta name="robots" content="noindex" />}
+    <slot name="head" />
+  </head>
+  <body>
+    <a
+      href="#conteudo"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:rounded focus:bg-fundo focus:px-4 focus:py-2"
+    >
+      Pular para o conteúdo
+    </a>
+    {/* Early in the tab order; GA4 and the Meta Pixel load only after "Aceitar". */}
+    {temRastreamento(rastreamento) && <AvisoCookies conteudo={conteudo} />}
+
+    {
+      conteudo.em_construcao && (
+        <aside aria-label="Aviso de site em construção" class="superficie-escura bg-texto px-4 py-2 text-center text-sm text-fundo">
+          <p>
+            <strong>Site em construção.</strong> Os contatos desta página ainda são provisórios.
+          </p>
+        </aside>
+      )
+    }
+
+    <header class="sticky top-0 z-40 border-b border-texto/10 bg-fundo/95 backdrop-blur">
+      <div class="container-site flex h-16 items-center justify-between gap-4">
+        <a href="/" class="flex items-center gap-2 font-titulo text-base leading-tight font-semibold sm:text-lg">
+          <span class="font-mono text-sm text-destaque" aria-hidden="true">&gt;_</span>
+          {conteudo.site.nome}
+        </a>
+        {
+          menu.length > 0 && (
+            <nav aria-label="Principal" class="hidden md:block">
+              <ul class="flex gap-6 text-sm">
+                {menu.map((item) => (
+                  <li>
+                    <a href={item.href} class="text-texto-suave hover:text-primaria">
+                      {item.texto}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          )
+        }
+        <a
+          href={linkWhatsApp(contato.whatsapp, contato.mensagem_whatsapp)}
+          target="_blank"
+          rel="noopener"
+          class="botao-primario min-h-10 px-4 py-2 text-sm"
+        >
+          WhatsApp
+        </a>
+      </div>
+    </header>
+
+    {/* tabindex lets the skip link move focus, not just scroll, into the content. */}
+    <main id="conteudo" tabindex="-1" class="outline-none">
+      <slot />
+    </main>
+    <slot name="depois" />
+  </body>
+</html>

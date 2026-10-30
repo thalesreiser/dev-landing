@@ -1,0 +1,199 @@
+@import "tailwindcss";
+
+/* Theme tokens: Base.astro sets the --cor-* / --fonte-* variables from content/site.json. */
+@theme inline {
+  --color-primaria: var(--cor-primaria);
+  --color-primaria-contraste: var(--cor-primaria-contraste);
+  --color-destaque: var(--cor-destaque);
+  --color-destaque-escuro: var(--cor-destaque-escuro);
+  --color-fundo: var(--cor-fundo);
+  --color-superficie: var(--cor-superficie);
+  --color-texto: var(--cor-texto);
+  --color-texto-suave: var(--cor-texto-suave);
+  --color-cartao: var(--cor-cartao);
+  --font-titulo: var(--fonte-titulo);
+  --font-texto: var(--fonte-texto);
+  --font-mono: var(--fonte-mono);
+  --radius-cartao: 12px;
+  --radius-botao: 8px;
+  --radius-campo: 8px;
+}
+
+/* Fixed error color: checked against both light backgrounds in tests/contraste.test.ts. */
+@theme {
+  --color-erro: #b42318;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+    /* Keeps focused fields clear of the WhatsApp bar (about 4.5rem) and round button (5rem). */
+    scroll-padding-bottom: 6rem;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  :root {
+    /* Card background: the light color opposite to the section background (see fundo-*). */
+    --cor-cartao: var(--cor-superficie);
+  }
+
+  body {
+    @apply bg-fundo font-texto text-texto antialiased;
+  }
+
+  h1,
+  h2,
+  h3 {
+    @apply font-titulo text-balance;
+  }
+
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-primaria;
+  }
+
+  /* Dark surfaces (notice bar, hero panel, footer): a light focus ring stays visible. */
+  .superficie-escura :focus-visible {
+    outline-color: var(--cor-fundo);
+  }
+}
+
+@utility container-site {
+  @apply mx-auto w-full max-w-6xl px-4 sm:px-6;
+}
+
+@utility secao {
+  @apply py-16 sm:py-24;
+}
+
+/*
+  Section backgrounds (index.astro wraps each section in one of these). A primary band
+  redefines the theme colors inside it, so components need no variant of their own.
+*/
+@utility fundo-fundo {
+  --cor-cartao: var(--cor-superficie);
+  background-color: var(--cor-fundo);
+}
+
+@utility fundo-superficie {
+  --cor-cartao: var(--cor-fundo);
+  background-color: var(--cor-superficie);
+}
+
+@utility fundo-primaria {
+  --cor-primaria: var(--faixa-texto);
+  --cor-primaria-contraste: var(--faixa-fundo);
+  --cor-texto: var(--faixa-texto);
+  --cor-texto-suave: var(--faixa-texto-suave);
+  --cor-destaque: var(--faixa-destaque);
+  --cor-fundo: var(--faixa-fundo);
+  --cor-superficie: var(--faixa-fundo);
+  --cor-cartao: transparent;
+  background-color: var(--faixa-fundo);
+  color: var(--faixa-texto);
+}
+
+/* Faint grid behind the hero: decorative, far below any text contrast. */
+@utility fundo-grade {
+  background-image:
+    linear-gradient(to right, color-mix(in oklab, var(--cor-texto) 5%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in oklab, var(--cor-texto) 5%, transparent) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+@utility titulo-secao {
+  @apply text-3xl font-semibold tracking-tight sm:text-4xl;
+}
+
+/* Monospace kicker above section titles, e.g. "/projetos". */
+@utility rotulo-mono {
+  @apply font-mono text-sm font-medium text-destaque;
+}
+
+@utility botao {
+  @apply inline-flex min-h-12 items-center justify-center gap-2 rounded-botao px-6 py-3 text-base font-semibold transition-[color,background-color,border-color,opacity];
+}
+
+@utility botao-primario {
+  @apply botao bg-primaria text-primaria-contraste hover:opacity-90;
+}
+
+@utility botao-secundario {
+  @apply botao border border-current text-primaria hover:bg-superficie;
+}
+
+@utility etiqueta {
+  @apply inline-flex items-center rounded-full border border-texto/15 px-2.5 py-0.5 font-mono text-xs text-texto;
+}
+
+@layer components {
+  .cartao {
+    border: 1px solid color-mix(in oklab, var(--cor-texto) 12%, transparent);
+    border-radius: var(--radius-cartao);
+    background-color: var(--cor-cartao);
+    padding: 1.5rem;
+  }
+
+  .cartao-compacto {
+    padding: 1rem;
+  }
+
+  /* On a primary band, cards are transparent: a light outline keeps their shape. */
+  .fundo-primaria .cartao {
+    border-color: color-mix(in oklab, var(--cor-texto) 30%, transparent);
+  }
+
+  .cartao-icone {
+    display: inline-flex;
+    width: 3rem;
+    height: 3rem;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-campo);
+    background-color: color-mix(in oklab, var(--cor-primaria) 10%, transparent);
+    color: var(--cor-primaria);
+  }
+}
+
+/*
+  WhatsApp shortcut (BotaoWhatsApp.astro): the inline script sets data-oculto while the hero
+  is on screen. visibility: hidden also takes the links out of the tab order and the a11y tree.
+*/
+.atalho-whatsapp > * {
+  transition:
+    transform 200ms ease-out,
+    opacity 200ms ease-out;
+}
+
+.atalho-whatsapp {
+  transition: visibility 200ms;
+}
+
+.atalho-whatsapp[data-oculto] {
+  visibility: hidden;
+}
+
+.atalho-whatsapp[data-oculto] > * {
+  opacity: 0;
+  transform: translateY(100%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .atalho-whatsapp,
+  .atalho-whatsapp > * {
+    transition: none;
+  }
+}
+
+/* Generated project card header: the same grid as the hero, light lines on the dark surface. */
+.fundo-grade-escura {
+  background-image:
+    linear-gradient(to right, color-mix(in oklab, var(--cor-fundo) 7%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in oklab, var(--cor-fundo) 7%, transparent) 1px, transparent 1px);
+  background-size: 24px 24px;
+}

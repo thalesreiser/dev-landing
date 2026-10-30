@@ -1,0 +1,37 @@
+---
+import TituloSecao from './TituloSecao.astro';
+import { ancoraSecao, type SecaoDo } from '../lib/schema.ts';
+
+interface Props {
+  secao: SecaoDo<'como_funciona'>;
+}
+
+const { secao } = Astro.props;
+const ancora = ancoraSecao(secao);
+const idTitulo = `${ancora}-titulo`;
+---
+
+<section id={ancora} class="secao" aria-labelledby={idTitulo}>
+  <div class="container-site">
+    <TituloSecao id={idTitulo} ancora={ancora} titulo={secao.titulo} subtitulo={secao.subtitulo} />
+    <ol class="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+      {
+        secao.passos.map((passo, i) => (
+          <li class="cartao relative">
+            <span
+              class="flex size-10 items-center justify-center rounded-full border-2 border-destaque font-mono font-semibold text-destaque"
+              aria-hidden="true"
+            >
+              {i + 1}
+            </span>
+            <h3 class="mt-4 text-lg font-semibold">
+              <span class="sr-only">Passo {i + 1}: </span>
+              {passo.titulo}
+            </h3>
+            <p class="mt-2 text-texto-suave">{passo.descricao}</p>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>

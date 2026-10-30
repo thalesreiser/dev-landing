@@ -1,0 +1,50 @@
+---
+import Icone from './Icone.astro';
+import type { Conteudo, SecaoDo } from '../lib/schema.ts';
+import { linkWhatsApp } from '../lib/whatsapp.ts';
+
+interface Props {
+  secao: SecaoDo<'botao_whatsapp'>;
+  conteudo: Conteudo;
+}
+
+const { secao, conteudo } = Astro.props;
+const href = linkWhatsApp(conteudo.contato.whatsapp, secao.mensagem ?? conteudo.contato.mensagem_whatsapp);
+---
+
+{/* Mobile: labelled bar at the bottom of the screen. Desktop: round button. */}
+<aside aria-label="Atalho para o WhatsApp" class="atalho-whatsapp">
+  <div class="fixed inset-x-0 bottom-0 z-40 border-t border-texto/10 bg-fundo/95 p-3 backdrop-blur sm:hidden">
+    <a href={href} target="_blank" rel="noopener" class="botao w-full bg-[#1D7D4A] px-3 text-[15px] leading-tight text-white hover:opacity-90">
+      <Icone nome="mensagem" class="size-5 shrink-0" />
+      {secao.rotulo}
+    </a>
+  </div>
+  <a
+    href={href}
+    target="_blank"
+    rel="noopener"
+    aria-label={secao.rotulo}
+    title={secao.rotulo}
+    class="fixed right-6 bottom-6 z-40 hidden size-14 items-center justify-center rounded-full bg-[#1D7D4A] text-white shadow-lg transition-transform hover:scale-105 sm:inline-flex"
+  >
+    <Icone nome="mensagem" class="size-7" />
+  </a>
+</aside>
+
+{/*
+  Inline so it runs before the first paint: the shortcut is visible without JS and
+  only hides (while the hero is on screen) once this script has run.
+*/}
+<script is:inline>
+  (function () {
+    var atalho = document.querySelector('.atalho-whatsapp');
+    var hero = document.querySelector('[data-hero]');
+    if (!atalho || !hero || !('IntersectionObserver' in window)) return;
+    atalho.setAttribute('data-oculto', '');
+    new IntersectionObserver(function (entradas) {
+      var entrada = entradas[entradas.length - 1];
+      atalho.toggleAttribute('data-oculto', entrada.isIntersecting);
+    }).observe(hero);
+  })();
+</script>

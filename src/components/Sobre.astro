@@ -1,0 +1,70 @@
+---
+import Imagem from './Imagem.astro';
+import TituloSecao from './TituloSecao.astro';
+import { ancoraSecao, type SecaoDo } from '../lib/schema.ts';
+
+interface Props {
+  secao: SecaoDo<'sobre'>;
+  nome: string;
+}
+
+const { secao, nome } = Astro.props;
+const ancora = ancoraSecao(secao);
+const idTitulo = `${ancora}-titulo`;
+const iniciais = nome
+  .split(/\s+/)
+  .filter(Boolean)
+  .map((parte) => parte[0])
+  .slice(0, 2)
+  .join('');
+---
+
+<section id={ancora} class="secao" aria-labelledby={idTitulo}>
+  <div class="container-site grid items-start gap-10 lg:grid-cols-[1fr_20rem] lg:gap-16">
+    <div>
+      <TituloSecao id={idTitulo} ancora={ancora} titulo={secao.titulo} />
+      <div class="mt-6 max-w-2xl space-y-4 text-lg text-texto-suave">
+        {secao.paragrafos.map((paragrafo) => <p>{paragrafo}</p>)}
+      </div>
+      {
+        secao.registros && (
+          <dl class="mt-8 grid gap-4 sm:grid-cols-3">
+            {secao.registros.map((registro) => (
+              <div class="cartao cartao-compacto">
+                <dt class="font-mono text-sm text-texto-suave">{registro.rotulo}</dt>
+                <dd class="mt-1 font-semibold break-words">
+                  {registro.href ? (
+                    <a href={registro.href} target="_blank" rel="noopener" class="text-primaria underline underline-offset-4">
+                      {registro.valor}
+                    </a>
+                  ) : (
+                    registro.valor
+                  )}
+                </dd>
+              </div>
+            ))}
+          </dl>
+        )
+      }
+    </div>
+    {
+      secao.foto ? (
+        <Imagem
+          imagem={secao.foto}
+          sizes="(min-width: 1024px) 20rem, calc(100vw - 2rem)"
+          larguras={[320, 480, 640]}
+          class="mx-auto aspect-[4/5] w-full max-w-xs rounded-cartao object-cover lg:max-w-none"
+        />
+      ) : (
+        <div
+          role="img"
+          aria-label={`Espaço reservado para a foto de ${nome}`}
+          class="mx-auto flex aspect-[4/5] w-full max-w-xs flex-col items-center justify-center gap-3 rounded-cartao border-2 border-dashed border-texto/25 bg-cartao lg:max-w-none"
+        >
+          <span class="font-titulo text-6xl font-semibold text-texto-suave">{iniciais}</span>
+          <span class="font-mono text-sm text-texto-suave">foto em breve</span>
+        </div>
+      )
+    }
+  </div>
+</section>

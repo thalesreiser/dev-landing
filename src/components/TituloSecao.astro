@@ -1,0 +1,15 @@
+---
+interface Props {
+  id: string;
+  // Anchor of the section, shown as a monospace kicker ("/projetos").
+  ancora: string;
+  titulo: string;
+  subtitulo?: string | undefined;
+}
+
+const { id, ancora, titulo, subtitulo } = Astro.props;
+---
+
+<p class="rotulo-mono" aria-hidden="true">/{ancora}</p>
+<h2 id={id} class="titulo-secao mt-2">{titulo}</h2>
+{subtitulo && <p class="mt-4 max-w-2xl text-lg text-texto-suave">{subtitulo}</p>}
