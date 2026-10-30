@@ -1,0 +1,42 @@
+---
+import Icone from './Icone.astro';
+import TituloSecao from './TituloSecao.astro';
+import { ancoraSecao, type SecaoDo } from '../lib/schema.ts';
+
+interface Props {
+  secao: SecaoDo<'servicos'>;
+}
+
+const { secao } = Astro.props;
+const ancora = ancoraSecao(secao);
+const idTitulo = `${ancora}-titulo`;
+---
+
+<section id={ancora} class="secao" aria-labelledby={idTitulo}>
+  <div class="container-site">
+    <TituloSecao id={idTitulo} ancora={ancora} titulo={secao.titulo} subtitulo={secao.subtitulo} />
+    <ul class:list={['mt-10 grid gap-6', secao.itens.length > 1 && 'md:grid-cols-2']}>
+      {
+        secao.itens.map((item) => (
+          <li class="cartao sm:p-8">
+            <span class="cartao-icone">
+              <Icone nome={item.icone} />
+            </span>
+            <h3 class="mt-4 text-xl font-semibold">{item.titulo}</h3>
+            <p class="mt-2 text-texto-suave">{item.descricao}</p>
+            {item.inclui && (
+              <ul class="mt-6 space-y-3 border-t border-texto/10 pt-6">
+                {item.inclui.map((linha) => (
+                  <li class="flex gap-3">
+                    <Icone nome="check" class="mt-0.5 size-5 shrink-0 text-destaque" />
+                    <span>{linha}</span>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

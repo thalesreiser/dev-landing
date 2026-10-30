@@ -1,0 +1,57 @@
+---
+import Base from '../layouts/Base.astro';
+import BotaoWhatsApp from '../components/BotaoWhatsApp.astro';
+import ComoFunciona from '../components/ComoFunciona.astro';
+import FAQ from '../components/FAQ.astro';
+import Formulario from '../components/Formulario.astro';
+import Hero from '../components/Hero.astro';
+import Projetos from '../components/Projetos.astro';
+import Rodape from '../components/Rodape.astro';
+import Servicos from '../components/Servicos.astro';
+import Sobre from '../components/Sobre.astro';
+import { carregarConteudo } from '../lib/conteudo.ts';
+import { gerarJsonLd, serializarJsonLd } from '../lib/seo.ts';
+import { fundosDasSecoes } from '../lib/tema.ts';
+
+const conteudo = carregarConteudo();
+const secoes = conteudo.secoes.filter((secao) => secao.ativo);
+// Footer and floating button live outside <main>; everything else keeps the JSON order.
+const blocos = secoes.filter((secao) => secao.tipo !== 'rodape' && secao.tipo !== 'botao_whatsapp');
+const rodape = secoes.find((secao) => secao.tipo === 'rodape');
+const botao = secoes.find((secao) => secao.tipo === 'botao_whatsapp');
+// Backgrounds are set here, not in the components, so the page keeps a regular rhythm.
+const fundos = fundosDasSecoes(blocos);
+const classesFundo = { fundo: 'fundo-fundo', superficie: 'fundo-superficie', primaria: 'fundo-primaria' } as const;
+---
+
+<Base conteudo={conteudo}>
+  <script is:inline slot="head" type="application/ld+json" set:html={serializarJsonLd(gerarJsonLd(conteudo))} />
+  {
+    blocos.map((secao, i) => (
+      <div class={classesFundo[fundos[i]!]}>
+        {(() => {
+          switch (secao.tipo) {
+            case 'hero':
+              return <Hero secao={secao} conteudo={conteudo} />;
+            case 'servicos':
+              return <Servicos secao={secao} />;
+            case 'projetos':
+              return <Projetos secao={secao} />;
+            case 'sobre':
+              return <Sobre secao={secao} nome={conteudo.autor.nome} />;
+            case 'como_funciona':
+              return <ComoFunciona secao={secao} />;
+            case 'faq':
+              return <FAQ secao={secao} />;
+            case 'formulario':
+              return <Formulario secao={secao} conteudo={conteudo} />;
+          }
+        })()}
+      </div>
+    ))
+  }
+  <Fragment slot="depois">
+    {rodape?.tipo === 'rodape' && <Rodape secao={rodape} conteudo={conteudo} comBotaoFixo={botao !== undefined} />}
+    {botao?.tipo === 'botao_whatsapp' && <BotaoWhatsApp secao={botao} conteudo={conteudo} />}
+  </Fragment>
+</Base>

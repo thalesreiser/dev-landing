@@ -1,0 +1,33 @@
+---
+import TituloSecao from './TituloSecao.astro';
+import { ancoraSecao, type SecaoDo } from '../lib/schema.ts';
+
+interface Props {
+  secao: SecaoDo<'faq'>;
+}
+
+const { secao } = Astro.props;
+const ancora = ancoraSecao(secao);
+const idTitulo = `${ancora}-titulo`;
+---
+
+<section id={ancora} class="secao" aria-labelledby={idTitulo}>
+  <div class="container-site max-w-3xl">
+    <TituloSecao id={idTitulo} ancora={ancora} titulo={secao.titulo} />
+    <div class="mt-10 divide-y divide-texto/10 border-y border-texto/10">
+      {
+        secao.itens.map((item) => (
+          <details class="group py-5">
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-lg font-semibold">
+              {item.pergunta}
+              <span class="text-2xl text-primaria transition-transform group-open:rotate-45" aria-hidden="true">
+                +
+              </span>
+            </summary>
+            <p class="mt-3 text-texto-suave">{item.resposta}</p>
+          </details>
+        ))
+      }
+    </div>
+  </div>
+</section>
