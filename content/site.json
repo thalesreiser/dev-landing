@@ -1,5 +1,5 @@
 {
-  "em_construcao": true,
+  "em_construcao": false,
   "site": {
     "nome": "Thales Reiser",
     "titulo": "Thales Reiser | Landing pages e pipelines de dados",
@@ -32,9 +32,9 @@
     ]
   },
   "contato": {
-    "whatsapp": "5551900000000",
+    "whatsapp": "5551993510202",
     "mensagem_whatsapp": "Olá, Thales! Vi seu site e quero conversar sobre um projeto.",
-    "email": "contato@example.com"
+    "email": "thalesped@hotmail.com"
   },
   "revisao": {
     "termos_vetados": [
@@ -162,7 +162,7 @@
       "titulo": "Como funciona",
       "fundo": "primaria",
       "passos": [
-        { "titulo": "Conversa inicial", "descricao": "Você conta o que precisa pelo WhatsApp ou pelo formulário. Eu pergunto sobre o objetivo, o público e o que já existe." },
+        { "titulo": "Conversa inicial", "descricao": "Você conta o que precisa pelo WhatsApp ou por e-mail. Eu pergunto sobre o objetivo, o público e o que já existe." },
         { "titulo": "Proposta por escrito", "descricao": "Envio o escopo, o que está incluído, o prazo estimado e o valor. Nada começa antes da sua aprovação." },
         { "titulo": "Desenvolvimento", "descricao": "Trabalho em etapas curtas e mostro versões de prévia para você revisar e pedir ajustes." },
         { "titulo": "Entrega", "descricao": "Publico o site ou entrego o pipeline com a documentação, e explico como cada parte funciona." }
@@ -182,6 +182,7 @@
     },
     {
       "tipo": "formulario",
+      "ativo": false,
       "id": "contato",
       "menu": "Contato",
       "titulo": "Contato",

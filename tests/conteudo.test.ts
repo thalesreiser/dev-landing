@@ -34,6 +34,10 @@ test('em_construcao is required, so the notice is never dropped by accident', ()
 test('leaving em_construcao requires real contacts and a form key', () => {
   const dados = copia();
   dados.em_construcao = false;
+  dados.contato.whatsapp = '5551900000000';
+  dados.contato.email = 'contato@example.com';
+  secao(dados, 'formulario').ativo = true;
+  secao(dados, 'formulario').chave = '';
   const resultado = conteudoSchema.safeParse(dados);
   assert.equal(resultado.success, false);
   const caminhos = resultado.error!.issues.map((i) => i.path.join('.'));
