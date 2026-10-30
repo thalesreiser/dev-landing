@@ -1,0 +1,210 @@
+{
+  "em_construcao": true,
+  "site": {
+    "nome": "Thales Reiser",
+    "titulo": "Thales Reiser | Landing pages e pipelines de dados",
+    "descricao": "Desenvolvedor em Porto Alegre/RS: landing pages rápidas para profissionais e pequenos negócios, e pipelines de dados com Spark, dbt e AWS.",
+    "url": "https://thales-dev.pages.dev",
+    "idioma": "pt-BR"
+  },
+  "autor": {
+    "nome": "Thales Reiser Pedreira",
+    "cidade": "Porto Alegre",
+    "uf": "RS",
+    "perfis": ["https://github.com/thalesreiser"]
+  },
+  "tema": {
+    "cor_primaria": "#4338CA",
+    "cor_primaria_contraste": "#FFFFFF",
+    "cor_destaque": "#0F766E",
+    "cor_destaque_faixa": "#99F6E4",
+    "cor_destaque_escuro": "#5EEAD4",
+    "cor_fundo": "#FFFFFF",
+    "cor_superficie": "#F4F6F9",
+    "cor_texto": "#0F172A",
+    "cor_texto_suave": "#475569",
+    "fonte_titulo": "\"Space Grotesk\", system-ui, sans-serif",
+    "fonte_texto": "\"IBM Plex Sans\", system-ui, sans-serif",
+    "fonte_mono": "ui-monospace, SFMono-Regular, Menlo, Consolas, \"Liberation Mono\", monospace",
+    "fontes": [
+      { "familia": "Space Grotesk", "pesos": [600] },
+      { "familia": "IBM Plex Sans", "pesos": [400, 600] }
+    ]
+  },
+  "contato": {
+    "whatsapp": "5551900000000",
+    "mensagem_whatsapp": "Olá, Thales! Vi seu site e quero conversar sobre um projeto.",
+    "email": "contato@example.com"
+  },
+  "revisao": {
+    "termos_vetados": [
+      "o melhor", "a melhor", "os melhores", "as melhores", "número 1", "nº 1", "líder",
+      "garantido", "garantida", "garantimos", "garantia de resultado", "100%",
+      "revolucionário", "revolucionária", "inovador", "inovadora", "disruptivo", "incrível",
+      "imbatível", "sem igual", "de ponta", "top",
+      "grátis", "gratuito", "gratuita", "promoção", "desconto", "a partir de R$", "R$",
+      "clientes satisfeitos", "centenas de clientes", "dezenas de clientes",
+      "especialista", "expert", "ninja", "rockstar"
+    ]
+  },
+  "secoes": [
+    {
+      "tipo": "hero",
+      "selo": "dev · Porto Alegre/RS",
+      "titulo": "Landing pages para profissionais e pipelines de dados para empresas",
+      "subtitulo": "Sou Thales Reiser, desenvolvedor. Faço sites de uma página que carregam rápido e levam o visitante ao WhatsApp, e organizo dados para dashboards e relatórios. Os projetos abaixo estão no GitHub, com código e documentação.",
+      "destaques": [
+        { "rotulo": "sites", "valor": "Astro, Tailwind CSS e Cloudflare Pages" },
+        { "rotulo": "dados", "valor": "Spark, dbt, DuckDB, AWS e Terraform" },
+        { "rotulo": "atendimento", "valor": "Remoto, a partir de Porto Alegre/RS" },
+        { "rotulo": "código", "valor": "github.com/thalesreiser" }
+      ],
+      "acao_principal": { "tipo": "whatsapp", "texto": "Conversar pelo WhatsApp" },
+      "acao_secundaria": { "tipo": "link", "texto": "Ver projetos", "href": "#projetos" }
+    },
+    {
+      "tipo": "servicos",
+      "menu": "Serviços",
+      "titulo": "Serviços",
+      "subtitulo": "Dois tipos de projeto, com escopo, prazo e valor combinados por escrito antes de começar.",
+      "itens": [
+        {
+          "icone": "janela",
+          "titulo": "Landing pages para profissionais e pequenos negócios",
+          "descricao": "Um site de uma página com seus serviços, sua forma de atendimento e um caminho direto para o contato, pensado para o celular.",
+          "inclui": [
+            "Site em Astro e Tailwind CSS, rápido e sem construtor de sites",
+            "Botão de WhatsApp e formulário de contato",
+            "SEO básico: título, descrição, sitemap e dados estruturados",
+            "Aviso de cookies (LGPD) quando houver medição de audiência",
+            "Publicação na Cloudflare Pages, com o seu domínio"
+          ]
+        },
+        {
+          "icone": "dados",
+          "titulo": "Dashboards e pipelines de dados",
+          "descricao": "Coleta, limpeza e organização dos dados para que relatórios e dashboards leiam de uma base atualizada e testada.",
+          "inclui": [
+            "Processamento de volumes grandes com Spark e Delta Lake",
+            "AWS (Lambda, S3, Glue e Athena) com a infraestrutura em Terraform",
+            "Modelagem com dbt e DuckDB, com testes de qualidade",
+            "APIs em FastAPI para servir os dados a outros sistemas",
+            "Documentação de cada etapa junto com o código"
+          ]
+        }
+      ]
+    },
+    {
+      "tipo": "projetos",
+      "menu": "Projetos",
+      "titulo": "Projetos",
+      "subtitulo": "Projetos públicos no GitHub, com código, testes e as decisões técnicas registradas.",
+      "itens": [
+        {
+          "titulo": "spark-cnpj-lakehouse",
+          "icone": "dados",
+          "status": "Em finalização",
+          "descricao": "Lakehouse em camadas (bronze, silver e gold) com Spark e Delta Lake sobre os dados abertos de CNPJ da Receita Federal, com cargas incrementais por MERGE, verificações de qualidade e um benchmark documentado de antes e depois da otimização.",
+          "tags": ["Spark 3.5", "Delta Lake", "PySpark", "MinIO", "Docker Compose"],
+          "links": [{ "texto": "Repositório", "href": "https://github.com/thalesreiser/spark-cnpj-lakehouse" }]
+        },
+        {
+          "titulo": "aws-fundos-pipeline",
+          "icone": "grafico",
+          "status": "Em desenvolvimento",
+          "descricao": "Pipeline na AWS, em construção, que leva os dados abertos de fundos de investimento da CVM até tabelas consultáveis no Athena: ingestão com Lambda, transformação com Glue, infraestrutura toda em Terraform e orquestração com Airflow.",
+          "tags": ["AWS Lambda", "S3", "Glue", "Athena", "Terraform", "Airflow"],
+          "links": [{ "texto": "Repositório", "href": "https://github.com/thalesreiser/aws-fundos-pipeline" }]
+        },
+        {
+          "titulo": "dbt-dw-api",
+          "icone": "dados",
+          "status": "Concluído",
+          "descricao": "Data warehouse dimensional com dbt e DuckDB sobre os dados de fundos da CVM, com testes de qualidade, histórico de mudanças (SCD tipo 2) e uma API REST somente leitura em FastAPI.",
+          "tags": ["dbt", "DuckDB", "FastAPI", "Docker Compose"],
+          "links": [
+            { "texto": "Repositório", "href": "https://github.com/thalesreiser/dbt-dw-api" },
+            { "texto": "Documentação", "href": "https://thalesreiser.github.io/dbt-dw-api/" }
+          ]
+        },
+        {
+          "titulo": "landing-servicos-template",
+          "icone": "janela",
+          "descricao": "Template de landing page de serviços em Astro e Tailwind CSS, configurado por um arquivo JSON por cliente, com testes de contraste, SEO e aviso de cookies. É a base deste site.",
+          "tags": ["Astro", "Tailwind CSS", "Zod", "Cloudflare Pages"],
+          "links": [
+            { "texto": "Repositório", "href": "https://github.com/thalesreiser/landing-servicos-template" },
+            { "texto": "Demo advocacia", "href": "https://advocacia-demo.pages.dev" },
+            { "texto": "Demo fisioterapia", "href": "https://fisioterapia-demo.pages.dev" }
+          ]
+        }
+      ]
+    },
+    {
+      "tipo": "sobre",
+      "menu": "Sobre",
+      "titulo": "Sobre mim",
+      "paragrafos": [
+        "Sou Thales Reiser Pedreira, desenvolvedor em Porto Alegre/RS. Trabalho com dois tipos de projeto: sites de uma página para quem precisa ser encontrado e contatado, e pipelines de dados para quem precisa de números confiáveis.",
+        "Prefiro soluções simples de manter: código versionado, testes automatizados e documentação escrita junto com o código. Os projetos desta página são públicos para que você possa avaliar o trabalho antes de conversarmos.",
+        "O atendimento é remoto, por WhatsApp, e-mail ou videochamada."
+      ],
+      "registros": [
+        { "rotulo": "base", "valor": "Porto Alegre/RS" },
+        { "rotulo": "atendimento", "valor": "Remoto" },
+        { "rotulo": "github", "valor": "thalesreiser", "href": "https://github.com/thalesreiser" }
+      ]
+    },
+    {
+      "tipo": "como_funciona",
+      "id": "processo",
+      "menu": "Processo",
+      "titulo": "Como funciona",
+      "fundo": "primaria",
+      "passos": [
+        { "titulo": "Conversa inicial", "descricao": "Você conta o que precisa pelo WhatsApp ou pelo formulário. Eu pergunto sobre o objetivo, o público e o que já existe." },
+        { "titulo": "Proposta por escrito", "descricao": "Envio o escopo, o que está incluído, o prazo estimado e o valor. Nada começa antes da sua aprovação." },
+        { "titulo": "Desenvolvimento", "descricao": "Trabalho em etapas curtas e mostro versões de prévia para você revisar e pedir ajustes." },
+        { "titulo": "Entrega", "descricao": "Publico o site ou entrego o pipeline com a documentação, e explico como cada parte funciona." }
+      ]
+    },
+    {
+      "tipo": "faq",
+      "id": "duvidas",
+      "titulo": "Perguntas frequentes",
+      "itens": [
+        { "pergunta": "Quanto tempo leva?", "resposta": "Depende do escopo e de quando o conteúdo fica pronto. Uma landing page costuma ser mais rápida que um pipeline de dados, que depende do acesso às fontes. O prazo estimado vai por escrito na proposta." },
+        { "pergunta": "Onde o site fica hospedado?", "resposta": "Na Cloudflare Pages, que hospeda sites estáticos como este. A conta e o domínio ficam no seu nome, e eu faço a configuração. Se você já tem domínio ou hospedagem, vemos juntos o que aproveitar." },
+        { "pergunta": "E a manutenção depois da entrega?", "resposta": "Você recebe o código e a documentação, e pode seguir com quem preferir. Se quiser que eu cuide de atualizações de conteúdo ou de ajustes, combinamos isso à parte." },
+        { "pergunta": "O que eu preciso enviar?", "resposta": "Para um site: textos sobre você e seus serviços, contatos, logotipo e fotos, se tiver. Para um projeto de dados: acesso às fontes (planilhas, banco de dados ou sistema) e exemplos dos relatórios que você usa hoje. Se faltar algo, ajudo a organizar." },
+        { "pergunta": "Atende fora de Porto Alegre?", "resposta": "Sim. Todo o processo pode ser feito a distância, por WhatsApp, e-mail e videochamada." }
+      ]
+    },
+    {
+      "tipo": "formulario",
+      "id": "contato",
+      "menu": "Contato",
+      "titulo": "Contato",
+      "texto": "Conte em poucas linhas o que você precisa. Respondo pelo canal que você preferir.",
+      "alternativa_whatsapp": "Prefere conversar? Chame no WhatsApp",
+      "provedor": "web3forms",
+      "chave": "",
+      "campos": [
+        { "nome": "nome", "rotulo": "Nome", "tipo": "text", "autocomplete": "name" },
+        { "nome": "email", "rotulo": "E-mail", "tipo": "email", "autocomplete": "email" },
+        { "nome": "whatsapp", "rotulo": "WhatsApp", "tipo": "tel", "obrigatorio": false, "autocomplete": "tel", "placeholder": "(51) 90000-0000" },
+        { "nome": "tipo_projeto", "rotulo": "Tipo de projeto", "tipo": "select", "opcoes": ["Landing page", "Dashboard ou pipeline de dados", "Outro"], "erro": "Escolha uma opção." },
+        { "nome": "mensagem", "rotulo": "O que você precisa?", "tipo": "textarea", "ajuda": "Duas ou três frases bastam." }
+      ],
+      "consentimento": "Concordo com o uso dos meus dados para receber o retorno deste contato, conforme a",
+      "botao": "Enviar mensagem",
+      "mensagem_sucesso": "Mensagem enviada. Respondo assim que possível."
+    },
+    {
+      "tipo": "rodape",
+      "texto": "Landing pages e pipelines de dados.",
+      "links": [{ "texto": "GitHub", "href": "https://github.com/thalesreiser" }]
+    },
+    { "tipo": "botao_whatsapp", "rotulo": "Conversar pelo WhatsApp" }
+  ]
+}
